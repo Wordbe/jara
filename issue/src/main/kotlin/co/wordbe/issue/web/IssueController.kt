@@ -6,6 +6,7 @@ import co.wordbe.issue.model.IssueRequest
 import co.wordbe.issue.model.IssueResponse
 import co.wordbe.issue.service.IssueService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -31,4 +32,11 @@ class IssueController(
         @RequestParam(required = false, defaultValue = "TODO") status: IssueStatus,
     ) : List<IssueResponse> =
         issueService.getAll(status)
+
+    @GetMapping("/{id}")
+    fun get(
+        authUser: AuthUser,
+        @PathVariable id: Long,
+    ) : IssueResponse =
+        issueService.get(id)
 }
