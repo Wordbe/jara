@@ -1,1 +1,3 @@
-# jara
+# JARA :whale:
+- Issue service
+- Auth service
