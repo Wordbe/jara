@@ -54,5 +54,10 @@ class IssueService(
         }
     }
 
+    @Transactional
+    fun delete(id: Long) {
+        issueRepository.deleteById(id)
+    }
+
     private fun findByIdOrThrow(id: Long) = issueRepository.findByIdOrNull(id) ?: throw NotFoundException("이슈가 존재하지 않습니다")
 }
