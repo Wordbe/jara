@@ -42,4 +42,14 @@ class CommentController(
         @RequestBody request: CommentRequest,
     ) : CommentResponse? =
         commentService.edit(id, authUser.userId, request)
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun delete(
+        authUser: AuthUser,
+        @PathVariable issueId: Long,
+        @PathVariable id: Long,
+    ) {
+        commentService.delete(issueId, id, authUser.userId)
+    }
 }

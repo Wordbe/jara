@@ -11,7 +11,7 @@ class Comment(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id")
-    val issue: Issue,
+    var issue: Issue? = null,
 
     val userId: Long,
 

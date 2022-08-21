@@ -16,7 +16,7 @@ data class CommentResponse(
 
 fun Comment.toResponse() = CommentResponse(
     id = id!!,
-    issueId = issue.id!!,
+    issueId = issue?.id!!,
     userId = userId,
     body = body,
     username = username,

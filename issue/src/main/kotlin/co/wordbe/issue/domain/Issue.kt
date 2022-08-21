@@ -7,7 +7,7 @@ import javax.persistence.*
 
 @Entity
 @Table
-class Issue (
+class Issue(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -27,7 +27,7 @@ class Issue (
     @Enumerated(EnumType.STRING)
     var status: IssueStatus,
 
-    @OneToMany(mappedBy = "issue")
-    val comments : MutableList<Comment> = mutableListOf()
+    @OneToMany(mappedBy = "issue", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val comments: MutableList<Comment> = mutableListOf()
 
-    ) : BaseEntity()
+) : BaseEntity()
