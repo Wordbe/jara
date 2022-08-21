@@ -11,8 +11,11 @@ class Issue (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
+
     var userId: Long,
+
     var summary: String,
+
     var description: String,
 
     @Enumerated(EnumType.STRING)
@@ -23,5 +26,8 @@ class Issue (
 
     @Enumerated(EnumType.STRING)
     var status: IssueStatus,
+
+    @OneToMany(mappedBy = "issue")
+    val comments : MutableList<Comment> = mutableListOf()
 
     ) : BaseEntity()
