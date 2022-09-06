@@ -5,3 +5,9 @@ server:
 logging:
   level:
     org.springframework.data.r2dbc: DEBUG
+
+jwt:
+  issuer: jara
+  subject: auth
+  expires-time: 3600 # 1 hour
+  secret: my-secret
