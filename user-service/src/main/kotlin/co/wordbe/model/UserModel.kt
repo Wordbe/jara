@@ -3,6 +3,11 @@ package co.wordbe.model
 import co.wordbe.domain.entity.User
 import java.time.LocalDateTime
 
+
+data class UserEditRequest(
+    val username: String? = null,
+)
+
 data class MeResponse(
     val id: Long,
     val email: String,
