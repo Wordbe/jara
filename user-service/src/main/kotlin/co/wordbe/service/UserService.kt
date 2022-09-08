@@ -3,6 +3,7 @@ package co.wordbe.service
 import co.wordbe.config.JWTProperties
 import co.wordbe.domain.entity.User
 import co.wordbe.domain.entity.UserRepository
+import co.wordbe.exception.InvalidJWTException
 import co.wordbe.exception.PasswordNotMatchedException
 import co.wordbe.exception.UserExistsException
 import co.wordbe.exception.UserNotFoundException
@@ -12,6 +13,7 @@ import co.wordbe.model.SignUpRequest
 import co.wordbe.utils.BCryptUtils
 import co.wordbe.utils.JWTClaim
 import co.wordbe.utils.JWTUtils
+import com.auth0.jwt.interfaces.DecodedJWT
 import org.springframework.stereotype.Service
 import java.time.Duration
 
@@ -68,5 +70,20 @@ class UserService(
 
     suspend fun logout(token: String) {
         cacheManager.awaitEvict(token)
+    }
+
+    suspend fun getByToken(token: String): User {
+        val cachedUser: User =  cacheManager.awaitGetOrPut(key = token, ttl = CACHE_TTL) {
+            // 캐시가 유효하지 않은 경우 동작
+            val decodedJWT: DecodedJWT = JWTUtils.decode(token, jwtProperties.secret, jwtProperties.issuer)
+            val userId: Long = decodedJWT.claims["userId"]?.asLong() ?: throw InvalidJWTException()
+            getUser(userId)
+        }
+
+        return cachedUser
+    }
+
+    suspend fun getUser(userId: Long): User {
+        return userRepository.findById(userId) ?: throw UserNotFoundException()
     }
 }

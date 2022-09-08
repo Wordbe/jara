@@ -18,3 +18,7 @@ data class UserNotFoundException(
 data class PasswordNotMatchedException(
     override val message: String = "패스워드가 잘못되었습니다"
 ) : ServerException(400, message)
+
+data class InvalidJWTException(
+    override val message: String = "유효하지 않은 토큰입니다"
+) : ServerException(400, message)
