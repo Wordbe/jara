@@ -20,4 +20,3 @@
 
 ## 5) Resolve issues
 ![Resolve issues](./img/이슈완료처리.png)
-
