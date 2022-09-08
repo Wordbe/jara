@@ -22,7 +22,7 @@ data class MeResponse(
                 id = id!!,
                 email = email,
                 username = username,
-                profileUrl = if (profileUrl.isNullOrEmpty()) null else "https//localhost:9090/images/$profileUrl",
+                profileUrl = if (profileUrl.isNullOrEmpty()) null else "http://localhost:9090/images/$profileUrl",
                 createdAt = createdAt,
                 updatedAt = updatedAt,
             )
