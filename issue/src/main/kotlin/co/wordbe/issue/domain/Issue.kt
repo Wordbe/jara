@@ -30,4 +30,9 @@ class Issue(
     @OneToMany(mappedBy = "issue", cascade = [CascadeType.ALL], orphanRemoval = true)
     val comments: MutableList<Comment> = mutableListOf()
 
-) : BaseEntity()
+) : BaseEntity() {
+
+    fun isResolved() : Boolean {
+        return status == IssueStatus.RESOLVED
+    }
+}
