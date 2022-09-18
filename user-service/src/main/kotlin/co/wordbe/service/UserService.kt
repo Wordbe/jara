@@ -2,7 +2,7 @@ package co.wordbe.service
 
 import co.wordbe.config.JWTProperties
 import co.wordbe.domain.entity.User
-import co.wordbe.domain.entity.UserRepository
+import co.wordbe.domain.UserRepository
 import co.wordbe.exception.InvalidJWTException
 import co.wordbe.exception.PasswordNotMatchedException
 import co.wordbe.exception.UserExistsException
